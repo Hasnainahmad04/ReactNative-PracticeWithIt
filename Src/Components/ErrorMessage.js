@@ -12,6 +12,7 @@ function ErrorMessage({error, visible}) {
 }
 const styles = StyleSheet.create({
   text: {
+    paddingHorizontal: 10,
     fontSize: 18,
     color: colors.danger,
   },

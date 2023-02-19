@@ -1,9 +1,9 @@
 import React from 'react';
 import {TextInput, View, StyleSheet, Platform} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-function AppTextInput({icon, ...otherProps}) {
+function AppTextInput({icon, width = '100%', ...otherProps}) {
   return (
-    <View style={styles['container']}>
+    <View style={[styles['container'], {width}]}>
       {icon && (
         <MaterialCommunityIcons name={icon} size={20} style={styles['icon']} />
       )}
@@ -15,15 +15,13 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     backgroundColor: '#eee',
-    borderRadius: 25,
+    borderRadius: 35,
     padding: 10,
-    width: '100%',
     marginVertical: 10,
   },
   textInput: {
     fontSize: 18,
     width: '100%',
-    fontFamily: Platform.OS === 'android' ? 'Roboto' : 'Avenir',
   },
   icon: {
     marginRight: 10,
