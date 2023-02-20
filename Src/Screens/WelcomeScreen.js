@@ -1,5 +1,13 @@
-import React from 'react';
-import {Image, ImageBackground, StyleSheet, Text, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {
+  Image,
+  ImageBackground,
+  StyleSheet,
+  Text,
+  View,
+  PermissionsAndroid,
+} from 'react-native';
+import * as ImagePicker from 'react-native-image-picker';
 import AppButton from '../Components/AppButton';
 
 function WelcomeScreen(props) {

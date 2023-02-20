@@ -20,6 +20,27 @@ function Practice1(props) {
       value: 3,
     },
   ];
+
+  const [imageUri, setImageUri] = useState(undefined);
+  const options = {
+    title: 'Select Avatar',
+    takePhotoButtonTitle: 'Take Photo...',
+    chooseFromLibraryButtonTitle: 'Choose from Library...',
+    mediaType: 'photo',
+    selectionLimit: 0,
+    saveToPhotos: true,
+    quality: 0.5,
+  };
+  const imagePicker = async () => {
+    try {
+      const result = await ImagePicker.launchImageLibrary(options);
+      if (!result.didCancel) {
+        setImageUri(result.assets[0].uri);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <View>
       {/* <TextInput
