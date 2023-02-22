@@ -1,54 +1,37 @@
-import React, {useEffect, useState} from 'react';
-import {Switch, TextInput, View, PermissionsAndroid} from 'react-native';
-import {GestureHandlerRootView} from 'react-native-gesture-handler';
-import Geolocation from '@react-native-community/geolocation';
 import {NavigationContainer} from '@react-navigation/native';
+import React, {useEffect, useState} from 'react';
+import {PermissionsAndroid} from 'react-native';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import AuthContext from './Src/auth/context';
 
-import ListingDetailScreen from './Src/Screens/ListingDetailScreen';
-import ImageViewScen from './Src/Screens/ImageViewScreen';
-import MessagesScreen from './Src/Screens/MessagesScreen';
-import WelcomeScreen from './Src/Screens/WelcomeScreen';
-import Icon from './Src/Components/Icon';
-import colors from './Src/assets/colors';
-import ListItem from './Src/Components/ListItem';
-import AccountScreen from './Src/Screens/AccountScreen';
-import ListingScreen from './Src/Screens/ListingScreen';
-import AppTextInput from './Src/Components/AppTextInput';
-import AppPicker from './Src/Components/AppPicker';
-import LoginScreen from './Src/Screens/LoginScreen';
-import ListEditingScreen from './Src/Screens/ListEditingScreen';
-import RegisterScreen from './Src/Screens/RegisterScreen';
-import ImageInputList from './Src/Components/ImageInputList';
-import useLocation from './Src/hooks/useLocation';
+import AppNavigator from './Src/Navigation/AppNavigation';
 import AuthNavigator from './Src/Navigation/AuthNavigator';
 import theme from './Src/Navigation/navigationTheme';
-import AppNavigator from './Src/Navigation/AppNavigation';
 
 function App() {
-  const [imageUris, setImageUris] = useState([]);
+  const [user, setUser] = useState();
+
   const requestPermission = async () => {
     try {
       const granted = await PermissionsAndroid.requestMultiple(
         [
           PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
           PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+          PermissionsAndroid.PERMISSIONS.CAMERA,
         ],
 
         {
           title: 'Cool Photo App Camera Permission',
           message:
-            'Cool Photo App needs access to your camera ' +
+            'App needs access to your camera ' +
             'so you can take awesome pictures.',
           buttonNeutral: 'Ask Me Later',
           buttonNegative: 'Cancel',
           buttonPositive: 'OK',
         },
       );
-      if (Object.keys(granted).every(key => granted[key] === 'granted')) {
-        console.log('You can use the camera', granted);
-      } else {
-        console.log('Camera permission denied');
-      }
+      if (Object.keys(granted).every(key => granted[key] === 'granted'))
+        console.log('granted');
     } catch (err) {
       console.warn(err);
     }
@@ -57,14 +40,15 @@ function App() {
   useEffect(() => {
     requestPermission();
   }, []);
-  const locate = useLocation();
-  console.log(locate);
+
   return (
-    <NavigationContainer theme={theme}>
-      <GestureHandlerRootView style={{flex: 1}}>
-        <AppNavigator />
-      </GestureHandlerRootView>
-    </NavigationContainer>
+    <AuthContext.Provider value={{user, setUser}}>
+      <NavigationContainer theme={theme}>
+        <GestureHandlerRootView style={{flex: 1}}>
+          {!user ? <AuthNavigator /> : <AppNavigator />}
+        </GestureHandlerRootView>
+      </NavigationContainer>
+    </AuthContext.Provider>
   );
 }
 

@@ -5,10 +5,12 @@ import * as yup from 'yup';
 import AppButton from '../Components/AppButton';
 import AppTextInput from '../Components/AppTextInput';
 import ErrorMessage from '../Components/ErrorMessage';
+
 const validationSchema = yup.object({
   email: yup.string().required().email().label('Email'),
   password: yup.string().required().min(4).label('Password'),
 });
+
 function LoginScreen(props) {
   return (
     <View style={styles['container']}>

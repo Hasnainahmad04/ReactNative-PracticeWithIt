@@ -1,17 +1,27 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Image, StyleSheet, View} from 'react-native';
 import {Formik} from 'formik';
 import * as yup from 'yup';
+
+import useLocation from '../hooks/useLocation';
 import AppTextInput from '../Components/AppTextInput';
 import ErrorMessage from '../Components/ErrorMessage';
 import AppButton from '../Components/AppButton';
+import AuthContext from '../auth/context';
 
 const validationSchema = yup.object({
   username: yup.string().required().min(3).label('Username'),
   email: yup.string().email().required().label('Email'),
   password: yup.string().min(6).required().label('Password'),
 });
+
 function RegisterScreen(props) {
+  const authContext = useContext(AuthContext);
+  const location = useLocation();
+
+  const handleSubmit = user => {
+    authContext.setUser({...user, location});
+  };
   return (
     <View style={styles['container']}>
       <Image
@@ -20,7 +30,7 @@ function RegisterScreen(props) {
       />
       <Formik
         initialValues={{username: '', password: '', email: ''}}
-        onSubmit={values => console.log(values)}
+        onSubmit={values => handleSubmit(values)}
         validationSchema={validationSchema}>
         {({handleChange, handleSubmit, touched, setFieldTouched, errors}) => (
           <>

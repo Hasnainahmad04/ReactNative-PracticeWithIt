@@ -7,7 +7,7 @@ import RegisterScreen from '../Screens/RegisterScreen';
 const Stack = createNativeStackNavigator();
 
 const AuthNavigator = () => (
-  <Stack.Navigator>
+  <Stack.Navigator screenOptions={{animation: 'slide_from_right'}}>
     <Stack.Screen
       name="Welcome"
       component={WelcomeScreen}
