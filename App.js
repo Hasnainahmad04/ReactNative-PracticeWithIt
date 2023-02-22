@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Switch, TextInput, View, PermissionsAndroid} from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import Geolocation from '@react-native-community/geolocation';
+import {NavigationContainer} from '@react-navigation/native';
 
 import ListingDetailScreen from './Src/Screens/ListingDetailScreen';
 import ImageViewScen from './Src/Screens/ImageViewScreen';
@@ -19,6 +20,9 @@ import ListEditingScreen from './Src/Screens/ListEditingScreen';
 import RegisterScreen from './Src/Screens/RegisterScreen';
 import ImageInputList from './Src/Components/ImageInputList';
 import useLocation from './Src/hooks/useLocation';
+import AuthNavigator from './Src/Navigation/AuthNavigator';
+import theme from './Src/Navigation/navigationTheme';
+import AppNavigator from './Src/Navigation/AppNavigation';
 
 function App() {
   const [imageUris, setImageUris] = useState([]);
@@ -56,9 +60,11 @@ function App() {
   const locate = useLocation();
   console.log(locate);
   return (
-    <GestureHandlerRootView style={{flex: 1}}>
-      <ListEditingScreen />
-    </GestureHandlerRootView>
+    <NavigationContainer theme={theme}>
+      <GestureHandlerRootView style={{flex: 1}}>
+        <AppNavigator />
+      </GestureHandlerRootView>
+    </NavigationContainer>
   );
 }
 

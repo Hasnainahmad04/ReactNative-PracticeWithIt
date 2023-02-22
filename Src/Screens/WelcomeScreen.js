@@ -10,7 +10,7 @@ import {
 import * as ImagePicker from 'react-native-image-picker';
 import AppButton from '../Components/AppButton';
 
-function WelcomeScreen(props) {
+function WelcomeScreen({navigation}) {
   return (
     <ImageBackground
       blurRadius={10}
@@ -24,8 +24,15 @@ function WelcomeScreen(props) {
         <Text style={styles['tagline']}>Sell What You Don't Need</Text>
       </View>
       <View style={styles['buttonContainer']}>
-        <AppButton title={'login'} />
-        <AppButton color="secondary" title={'Regisetr'} />
+        <AppButton
+          title={'login'}
+          onPress={() => navigation.navigate('Login')}
+        />
+        <AppButton
+          color="secondary"
+          title={'Regisetr'}
+          onPress={() => navigation.navigate('Register')}
+        />
       </View>
     </ImageBackground>
   );

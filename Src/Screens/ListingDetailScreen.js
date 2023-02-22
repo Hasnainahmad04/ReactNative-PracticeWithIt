@@ -3,13 +3,14 @@ import {Image, Text, View, StyleSheet} from 'react-native';
 import colors from '../assets/colors';
 import ListItem from '../Components/ListItem';
 
-function ListingDetailScreen(props) {
+function ListingDetailScreen({route}) {
+  const listing = route.params;
   return (
     <View>
-      <Image source={require('../assets/jacket.jpg')} style={styles['image']} />
+      <Image source={listing.image} style={styles['image']} />
       <View style={styles['detailContainer']}>
-        <Text style={styles['title']}>Red Jacket For Sale</Text>
-        <Text style={styles['subTitle']}>$100</Text>
+        <Text style={styles['title']}>{listing.title}</Text>
+        <Text style={styles['subTitle']}>{listing.subTitle}</Text>
         <View style={styles['userContainer']}>
           <ListItem
             image={require('../assets/jacket.jpg')}

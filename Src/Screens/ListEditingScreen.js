@@ -27,7 +27,7 @@ function ListEditingScreen(props) {
   ];
 
   return (
-    <View>
+    <View style={{padding: 10}}>
       <Formik
         initialValues={{
           title: '',

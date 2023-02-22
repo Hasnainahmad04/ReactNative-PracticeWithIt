@@ -5,7 +5,7 @@ import Icon from '../Components/Icon';
 import ListItem from '../Components/ListItem';
 import ListItemSeperator from '../Components/ListItemSeperator';
 
-function AccountScreen(props) {
+function AccountScreen({navigation}) {
   const menuItem = [
     {
       title: 'My Listing',
@@ -20,6 +20,7 @@ function AccountScreen(props) {
         name: 'email',
         background: colors.secondary,
       },
+      targetScreen: 'Messages',
     },
   ];
   return (
@@ -44,6 +45,7 @@ function AccountScreen(props) {
                   backgroundColor={item.icon.background}
                 />
               }
+              onPress={() => navigation.navigate(item.targetScreen)}
             />
           )}
           ItemSeparatorComponent={ListItemSeperator}

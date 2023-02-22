@@ -2,7 +2,7 @@ import React from 'react';
 import {FlatList, View, StyleSheet} from 'react-native';
 import Card from '../Components/Card';
 
-function ListingScreen(props) {
+function ListingScreen({navigation}) {
   const item = [
     {
       id: 1,
@@ -12,7 +12,7 @@ function ListingScreen(props) {
     },
     {
       id: 2,
-      title: 'Red Jacket for Sale!',
+      title: 'Mr.  for Sale!',
       subTitle: 1000,
       image: require('../assets/jacket.jpg'),
     },
@@ -25,8 +25,9 @@ function ListingScreen(props) {
         renderItem={({item}) => (
           <Card
             title={item.title}
-            subTitle={item.subTitle}
+            subTitle={`$ ${item.subTitle}`}
             image={item.image}
+            onPress={() => navigation.navigate('ListingDetail', item)}
           />
         )}
       />
