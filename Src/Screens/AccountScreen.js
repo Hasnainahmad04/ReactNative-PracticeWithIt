@@ -1,11 +1,16 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, StyleSheet, FlatList} from 'react-native';
+import MapView from 'react-native-maps';
 import colors from '../assets/colors';
 import Icon from '../Components/Icon';
 import ListItem from '../Components/ListItem';
 import ListItemSeperator from '../Components/ListItemSeperator';
+import AuthContext from '../auth/context';
 
 function AccountScreen({navigation}) {
+  const authContext = useContext(AuthContext);
+  const {user} = authContext;
+
   const menuItem = [
     {
       title: 'My Listing',

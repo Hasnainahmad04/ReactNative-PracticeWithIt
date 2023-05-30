@@ -6,7 +6,7 @@ const useLocation = () => {
   const accessLocation = () => {
     Geolocation.getCurrentPosition(
       position => {
-        const {longitude, latitude} = position.coords;
+        const {latitude, longitude} = position.coords;
         setLocation({longitude, latitude});
       },
       error => {

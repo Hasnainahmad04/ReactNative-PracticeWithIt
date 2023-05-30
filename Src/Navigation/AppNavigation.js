@@ -1,12 +1,10 @@
-import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import React from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import ListingScreen from '../Screens/ListingScreen';
 import ListEditingScreen from '../Screens/ListEditingScreen';
-import AccountScreen from '../Screens/AccountScreen';
-import FeedNavigator from './FeedNavigation';
 import AccountNavigator from './AccountNavigation';
+import FeedNavigator from './FeedNavigation';
 import NewListButton from './NewListButton';
 
 const Tab = createBottomTabNavigator();
